@@ -259,7 +259,7 @@ int main(){
   insere_aresta(g,18,19,87);
 
 
-    a_star(g,0,12);
+    a_star(g,2,12);
 
   libera_grafo(&g);
 return 0;
