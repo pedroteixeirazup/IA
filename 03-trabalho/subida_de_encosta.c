@@ -1,68 +1,74 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <conio.h>
-#include <time.h>
-//CALCULA O CUSTO DO CONFRONTO DAS RAINHAS
-int calculaCusto(int tabuleiro[],int N){
-   int c = 0,i,j;
+#include <string.h>
 
-   for(i = 0; i < N ; i++){
-      for(j = i+1; j < N; j++){
-            if(tabuleiro[j] < tabuleiro[i])
-               c++;
-      }
-   }
+#define MAX 1000000
+#define N 4
 
-   return c;
+
+int verificaCustoRainha(int rainhas[N]){
+    int custo = 0,i,j;
+    int cont;
+
+    for(i = 0; i < N - 1; i++){
+        cont = 1;
+        for(j =  i + 1; j < N; j++){
+            if(rainhas[i] == rainhas[j] || rainhas[j] == rainhas[i] + cont || rainhas[j] ==  rainhas[i] - cont)
+                custo++;
+            cont++;
+        }
+    }
+    return custo;
 }
-//FAZ A TROCA DAS RAINHAS SE ESRTIVER CONFRONTO
-void swap(int tabuleiro[], int i, int j){
 
-   int tmp = tabuleiro[i];
-   tabuleiro[i] = tabuleiro[j];
-   tabuleiro[j] = tmp;
+int proxPasso(int rainhas[N]){
 
+    int lAux[N], possVisited[N];
+    int velho = MAX,posRainha, posTabela, conflitoRainha, aux;;
+
+    memcpy(lAux, rainhas, sizeof(int)*N);
+
+    for(int i = 0; i < N; i++){
+        for(int j = 0; j < N; j++){
+            lAux[i] = j;
+            conflitoRainha = verificaCustoRainha(lAux);
+            aux = conflitoRainha - 1;
+
+            if(aux < velho && rainhas[i] != j){
+                velho = aux;
+                posRainha = i;
+                posTabela = j;
+                printf("Posicao da rainha: %d, \nPosicao da tabela: %d, \nvelho: %d\n", posRainha, posTabela, velho);
+                printf("\n-------------------------------------------------------\n");
+                system("pause");
+            }
+        }
+    }
+        rainhas[posRainha] = posTabela;
+        conflitoRainha = verificaCustoRainha(rainhas);
+        if(conflitoRainha == 0)
+            return 1;
+        if(proxPasso(rainhas))
+            return 1;
+    return 0;
 }
 
 int main(){
-   int N = 4,i;
+    int rainhas[N];
+    int conflitoRainha;
 
+    for(int i = 0; i < N; i++)
+        rainhas[i] = 0;
 
-    //COLUNAS EM QUE AS RAINHAS SE ENCONTRAM
-   int tabuleiro[] = {4,1,3,2};
+    proxPasso(rainhas);
 
-    printf("Ordem das rainhas:\n");
-    for(i = 0; i < N; i++) printf("%d ", tabuleiro[i]);
-    printf("\n\n\n");
+    for(int i = 0; i < N; i++){
+        printf("%d ", rainhas[i]);
+    }
+    printf("\n");
+    conflitoRainha = verificaCustoRainha(rainhas);
+    printf("Existem %d rainhas em conflito!\n\n", conflitoRainha);
 
-   int melhorCusto = calculaCusto(tabuleiro,N), novoCusto, swaps = 0;
-
-   //CONTROLA A MELHOR POSICAO PARA A RAINHA
-   while(melhorCusto > 0){
-      int i;
-      for(i = 0; i < N-1; i++){
-
-         swap(tabuleiro,i,i+1);
-
-         novoCusto = calculaCusto(tabuleiro,N);
-
-         if(melhorCusto > novoCusto){
-
-            printf("Swap %d: \n", ++swaps);
-            for(i = 0; i < N; i++) printf("%d ", tabuleiro[i]);
-            printf("\n");
-            melhorCusto = novoCusto;
-
-         }else{
-            swap(tabuleiro,i,i+1);
-         }
-      }
-   }
-
-   printf("Resposta Final: \n");
-
-   for(i = 0; i < N; i++) printf("%d ",tabuleiro[i]);
-
- return 0;
+    return 0;
 }
 
