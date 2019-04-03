@@ -67,7 +67,7 @@ int main(){
     }
     printf("\n");
     conflitoRainha = verificaCustoRainha(rainhas);
-    printf("Existem %d rainhas em conflito!\n\n", conflitoRainha);
+    printf("O numero de rainhas em conflito e: %d", conflitoRainha);
 
     return 0;
 }
