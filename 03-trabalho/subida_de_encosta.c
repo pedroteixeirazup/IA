@@ -1,3 +1,4 @@
+/*Este programa se encontra em um LOOP, pois ele encontra um mínimo local*/
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
