@@ -1,6 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
-
+#include <conio.h>
+#include <time.h>
+//CALCULA O CUSTO DO CONFRONTO DAS RAINHAS
 int calculaCusto(int tabuleiro[],int N){
    int c = 0,i,j;
 
@@ -13,7 +15,7 @@ int calculaCusto(int tabuleiro[],int N){
 
    return c;
 }
-
+//FAZ A TROCA DAS RAINHAS SE ESRTIVER CONFRONTO
 void swap(int tabuleiro[], int i, int j){
 
    int tmp = tabuleiro[i];
@@ -23,20 +25,19 @@ void swap(int tabuleiro[], int i, int j){
 }
 
 int main(){
-   int N,i;
+   int N = 4,i;
 
-   printf("Escolha a quantidade de rainhas que desejas inserir no problema:");
 
-   scanf("%d", &N);
+    //COLUNAS EM QUE AS RAINHAS SE ENCONTRAM
+   int tabuleiro[] = {4,1,3,2};
 
-   //Repesentação das posições das rainhas no tabuleiro;
-   int tabuleiro[N];
-
-   printf("Digite as colunas em que desejas colocar as rainhas no tabuleiro:");
-   for(i = 0; i < N; i++) scanf("%d", &tabuleiro[i]);
+    printf("Ordem das rainhas:\n");
+    for(i = 0; i < N; i++) printf("%d ", tabuleiro[i]);
+    printf("\n\n\n");
 
    int melhorCusto = calculaCusto(tabuleiro,N), novoCusto, swaps = 0;
 
+   //CONTROLA A MELHOR POSICAO PARA A RAINHA
    while(melhorCusto > 0){
       int i;
       for(i = 0; i < N-1; i++){
@@ -47,7 +48,7 @@ int main(){
 
          if(melhorCusto > novoCusto){
 
-            printf("Antes do swap %d: \n", ++swaps);
+            printf("Swap %d: \n", ++swaps);
             for(i = 0; i < N; i++) printf("%d ", tabuleiro[i]);
             printf("\n");
             melhorCusto = novoCusto;
@@ -64,3 +65,4 @@ int main(){
 
  return 0;
 }
+
