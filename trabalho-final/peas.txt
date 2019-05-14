@@ -1,12 +1,12 @@
-Tema: Ia responsável por detectar a faces, tanto quando a da pessoa quando no documento(CNH).
+Tema: Ia responsável por detectar as faces, tanto a da pessoa quanto no documento (CNH).
 
 Agente : Agente Baseado em Utilidade.
-Performance: Detectar com máxima previsão o documento, a face da pessoa e a do documento, para abrir contas em um banco.
+Performance: Detectar com máxima precisão o documento, a face da pessoa e a do documento, para abrir contas em um banco.
 Sensores: Câmera do computador.
 Atuadores: Tela do computador.
-Ambiente: Empresa bancária.
+Ambiente: Empresas, Banco.
 Ambiente: Estocástico;
-          Sequencial;
+          Sequêncial;
           Observável;
           Contínuo;
           Agente único; 
